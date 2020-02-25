@@ -20,7 +20,6 @@
 
     <title>News</title>
   </head>
-
   <body>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,24 +35,50 @@
         </nav>
 
     <div class="container mt-5">
-       <div class = "row">
-          <div class = "col-lg-12 text-center mt-3 mb-3">
-                <h1>Your Local Newspaper</h1>
-                <img src = "newspaper.jpg" class = "img-fluid" style = "width: 50%" alt = "Reponsive Image"> 
-          </div>
-        </div>
         <div class = "row">
-            <div class = "col-lg-12 text-center mt-3 mb-3">
-                <form action="/news">
-                    <label>Please enter your location:</label>
-                    <input type="text" name="location">
-                    <button type="submit" class="btn btn-secondary"> Go there</submit>
-                </form>
+            <div class = "col-lg-12 mt-3 mb-3">
+                <h2> Current Weather </h2> 
+                    <% forecast = ForecastIO.forecast(@lat, @lng).to_hash %>
+                    <%= current_summary = forecast["currently"]["summary"]%>
+                    <%= current_temperature = forecast["currently"]["temperature"]%>
+                    <%= chances_of_rain = forecast["currently"]["precipProbability"]%>
             </div>
         </div>
+        <div class = "row">
+            <div class = "col-lg-12 mt-3 mb-3">
+                <h2> Extended Forecast </h2>
+                <% extended_forecast = forecast["daily"]["data"] %>
+                <% for weather in extended_forecast %>
+                        <%= weather["summary"] %>
+                        <%= weather["temperatureHigh"] %>
+                        <%= weather["precipProbability"] %>
+                              <br />
+                <% end %>
+            </div>
+        </div>
+         <hr class ="my-4">
+         <div class = "row">
+            <div class = "col-lg-12 mt-3 mb-3">
+             <h2> News </h2>
+            </div> 
+        </div>
+        <div class = "row">
+            <div class = "col-lg-12 mt-3 mb-3">
+                <% news = HTTParty.get(@url).parsed_response.to_hash %>
+                <% all_articles = news["articles"] %>
+                <% for each_article in all_articles %>
+                        <p id = articles_p>
+                            <%= each_article["title"] %>
+                        <br />
+                            <%= each_article ["url"] %>
+                        </p>
+                <%end%> 
+            </div>
     </div>
 
-          
+
+    </div>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
