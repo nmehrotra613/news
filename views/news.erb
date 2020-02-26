@@ -39,27 +39,61 @@
             <div class = "col-lg-12 mt-3 mb-3">
                 <h2> Current Weather </h2> 
                     <% forecast = ForecastIO.forecast(@lat, @lng).to_hash %>
-                    <%= current_summary = forecast["currently"]["summary"]%>
-                    <%= current_temperature = forecast["currently"]["temperature"]%>
-                    <%= chances_of_rain = forecast["currently"]["precipProbability"]%>
+                    <% current_summary = forecast["currently"]["summary"]%>
+                    <% current_temperature = forecast["currently"]["temperature"]%>
+                    <% chances_of_rain = forecast["currently"]["precipProbability"]%>
+                <div class = "table-responsive">
+                    <table class = "table table-bordered">
+                        <thead class = "table-header">
+                            <tr>
+                                <th scope = "col"> Weather Description </th>
+                                <th scope = "col"> Temperature </th>
+                                <th scope = "col"> Chance of Rain </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr> 
+                                <td class = "weather_details"> <%=current_summary %> </td>
+                                <td class = "weather_details"> <%=current_temperature %> </td>
+                                <td class = "weather_details"> <%=chances_of_rain%> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class = "row">
             <div class = "col-lg-12 mt-3 mb-3">
                 <h2> Extended Forecast </h2>
-                <% extended_forecast = forecast["daily"]["data"] %>
-                <% for weather in extended_forecast %>
-                        <%= weather["summary"] %>
-                        <%= weather["temperatureHigh"] %>
-                        <%= weather["precipProbability"] %>
-                              <br />
-                <% end %>
+                <div class = "table-responsive">
+                    <table class = "table table-bordered">
+                        <thead class = "table-header">
+                            <tr>
+                                <th scope = "col"> Weather Description </th>
+                                <th scope = "col"> Temperature </th>
+                                <th scope = "col"> Chance of Rain </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% extended_forecast = forecast["daily"]["data"] %>
+                            <% for weather in extended_forecast %>
+                                <tr>
+                                    <td class = "weather details"> <%= weather["summary"] %> </td>
+                                    <td class = "weather details"> <%= weather["temperatureHigh"] %> </td>
+                                    <td class = "weather details"> <%= weather["precipProbability"] %> </td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
          <hr class ="my-4">
+         
          <div class = "row">
             <div class = "col-lg-12 mt-3 mb-3">
-             <h2> News </h2>
+             <h2> National Headlines </h2>
             </div> 
         </div>
         <div class = "row">
