@@ -1,0 +1,19 @@
+
+
+h1{
+    font-family: 'Cedarville Cursive';
+    font-size: 45px;
+}
+
+h2,h3{
+     font-family: 'Merriweather';
+}
+
+.navbar{
+    font-family: 'Merriweather';
+}
+
+#label_form{
+    font-family: 'Merriweather';
+}
+
