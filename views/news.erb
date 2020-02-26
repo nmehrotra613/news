@@ -79,13 +79,13 @@
                             <% count = 0 %>
                             <% extended_forecast = forecast["daily"]["data"] %>
                             <% for weather in extended_forecast %>
-                                <% count = count + 1 %>
                                 <tr>
                                     <td class = "weather details"> <%= count %> </td>
                                     <td class = "weather details"> <%= weather["summary"] %> </td>
                                     <td class = "weather details"> <%= weather["temperatureHigh"] %> </td>
                                     <td class = "weather details"> <%= weather["precipProbability"] %> </td>
                                 </tr>
+                                <% count = count + 1 %>
                             <% end %>
                         </tbody>
                     </table>
