@@ -16,6 +16,7 @@ get "/news" do
     results = Geocoder.search(params["location"])
     lat_lng = results.first.coordinates
     #I am pulling out the country's ISO code. This will allow me to get the national news for any country based on the city.
+    # Per the News API documnetation, some countries they don't support so will result in no headlines.
     country_code = results.first.country_code
     @lat = lat_lng[0]
     @lng = lat_lng[1]
