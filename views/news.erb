@@ -69,15 +69,19 @@
                     <table class = "table table-bordered">
                         <thead class = "table-header">
                             <tr>
+                                <th scope = "col"> +# days </th>
                                 <th scope = "col"> Weather Description </th>
                                 <th scope = "col"> Temperature </th>
                                 <th scope = "col"> Chance of Rain </th>
                             </tr>
                         </thead>
                         <tbody>
+                            <% count = 0 %>
                             <% extended_forecast = forecast["daily"]["data"] %>
                             <% for weather in extended_forecast %>
+                                <% count = count + 1 %>
                                 <tr>
+                                    <td class = "weather details"> <%= count %> </td>
                                     <td class = "weather details"> <%= weather["summary"] %> </td>
                                     <td class = "weather details"> <%= weather["temperatureHigh"] %> </td>
                                     <td class = "weather details"> <%= weather["precipProbability"] %> </td>
@@ -89,9 +93,9 @@
             </div>
         </div>
 
-         <hr class ="my-4">
-         
-         <div class = "row">
+        <hr class ="my-4">
+    
+        <div class = "row">
             <div class = "col-lg-12 mt-3 mb-3">
              <h2> National Headlines </h2>
             </div> 
@@ -99,25 +103,35 @@
         <div class = "row">
             <div class = "col-lg-12 mt-3 mb-3">
                 <% news = HTTParty.get(@url).parsed_response.to_hash %>
-                <% all_articles = news["articles"] %>
-                <% for each_article in all_articles %>
-                        <p id = articles_p>
-                            <%= each_article["title"] %>
-                        <br />
-                            <%= each_article ["url"] %>
-                        </p>
-                <%end%> 
+                <div class = "table-responsive">
+                    <table class = "table table-bordered">
+                        <thead class = "table-header">
+                            <tr>
+                                <th scope = "col"> Headline </th>
+                                <th scope = "col"> Link  </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% all_articles = news["articles"] %>
+                            <% for each_article in all_articles %>
+                                <tr>
+                                    <td class = "news details">  <%= each_article["title"] %> </td>
+                                    <td class = "news details"> <%= each_article["url"] %> </td>
+                                </tr>
+                            <%end%> 
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </div>
     </div>
-
-
-    </div>
-
-
+ 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
   </body>
+  
 </html>
